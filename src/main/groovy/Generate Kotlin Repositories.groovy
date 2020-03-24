@@ -1,7 +1,5 @@
 import com.intellij.database.model.DasTable
 import com.intellij.database.util.Case
-import com.intellij.database.util.DasUtil
-
 typeMapping = [
         (~/(?i)tinyint\(1\)/)             : "Boolean",
         (~/(?i)tinyint/)                  : "Int",
@@ -11,9 +9,13 @@ typeMapping = [
         (~/(?i)datetime|timestamp/)       : "LocalDateTime",
         (~/(?i)date/)                     : "LocalDate",
         (~/(?i)time/)                     : "LocalTime",
-        (~/(?i)/)                         : "String",
         (~/(?i)enum/)                     : "enum",
+        (~/(?i)longtext|text/)            : "String",
+        (~/(?i)/)                         : "String",
+
 ]
+
+import com.intellij.database.util.DasUtil
 
 FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generated files") { dir ->
     SELECTION.filter { it instanceof DasTable }.each { generate(it, dir) }
@@ -67,3 +69,10 @@ def calcFields(table) {
     }
 }
 
+def javaName(str, capitalize) {
+    def s = com.intellij.psi.codeStyle.NameUtil.splitNameIntoWords(str)
+            .collect { Case.LOWER.apply(it).capitalize() }
+            .join("")
+            .replaceAll(/[^\p{javaJavaIdentifierPart}[_]]/, "_")
+    capitalize || s.length() == 1 ? s : Case.LOWER.apply(s[0]) + s[1..-1]
+}
