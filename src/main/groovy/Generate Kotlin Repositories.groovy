@@ -34,18 +34,18 @@ def generate(out, packageName, tableName, className, fields) {
     out.println "package $packageName"
     out.println ""
     out.println ""
-    out.println "import com.howbuild.backend.domain.rds.entity.$className"
+    out.println "import ${packageName.replace("repository", "entity")}.$className"
     out.println "import org.springframework.data.jpa.repository.JpaRepository"
     out.println ""
     out.println "interface ${className}Repository: JpaRepository<$className, Long> {"
     fields.each() {
         if (it.primary || it.isAutoInc) {
             out.println ""
-            out.println "   fun findBy${it.name}(no: ${it.type}): $className"
+            out.println "   fun findBy${it.name}(no: ${it.type}): $className?"
             out.println ""
         } else if ( it.isIndex ) {
             out.println ""
-            out.println "   fun findBy${it.name}(no: ${it.type}): $className"
+            out.println "   fun findBy${it.name}(no: ${it.type}): $className?"
             out.println ""
         }
     }
@@ -58,6 +58,7 @@ def calcFields(table) {
         def typeStr = typeMapping.find { p, t -> p.matcher(spec).find() }.value
         fields += [[
                            colName     : col.getName(),
+                           name        : javaName(col.getName(), true),
                            type        : typeStr,
                            orgType     : spec,
                            nullable    : !col.isNotNull(),

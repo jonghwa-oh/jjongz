@@ -46,10 +46,10 @@ def generate(out, packageName, tableName, className, fields) {
             out.println "    @Id"
             out.println "    @GeneratedValue"
             out.println "    @Column(name = \"${it.colName}\"${it.orgType == "text" ? ", columnDefinition=\"TEXT\"" : ""})"
-            out.println "    val ${it.name}: ${it.type}? = null,"
+            out.println "    var ${it.name}: ${it.type}? = null,"
         } else {
             out.println "    @Column(name = \"${it.colName}\"${it.orgType == "text" ? ", columnDefinition=\"TEXT\"" : ""})"
-            out.println "    val ${it.name}: ${it.type}${it.nullable || it.isNullType ? "? = null" : ""}${it == fields.last() ? "" : ","}"
+            out.println "    var ${it.name}: ${it.type}${it.nullable || it.isNullType ? "? = null" : ""}${it == fields.last() ? "" : ","}"
         }
         out.println ""
 
