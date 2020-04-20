@@ -24,7 +24,7 @@ tasks.withType<KotlinCompile> {
 tasks.register<Copy>("copyGroovyFile") {
     from("src/main/groovy")
     include("*.groovy")
-    into("/Users/jjongz/Library/Preferences/DataGrip2019.3/extensions/com.intellij.database/schema")
+    into("/Users/jjongz/Library/ApplicationSupport/JetBrains/DataGrip2020.1/extensions/com.intellij.database/schema")
 }
 
 repositories {
