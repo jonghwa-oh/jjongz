@@ -138,6 +138,10 @@ public class SqlVisitor {
     visitSqlExpression(o);
   }
 
+  public void visitSqlWithQueryExpression(final SqlWithQueryExpression o) {
+    visitSqlQueryExpression(o);
+  }
+
   public void visitSqlIntersectExpression(final SqlIntersectExpression o) {
     visitSqlExpression(o);
   }

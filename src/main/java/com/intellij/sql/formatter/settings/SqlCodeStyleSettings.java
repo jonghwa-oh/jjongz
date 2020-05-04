@@ -107,7 +107,7 @@ public class SqlCodeStyleSettings extends CustomCodeStyleSettings implements Sql
    * @return names of the non-applicable settings.
    */
   @NotNull
-  public Set<@NotNull String> getSettingsToHide() {
+  public Set<String> getSettingsToHide() {
     return SETTINGS_TO_HIDE;
   } 
   

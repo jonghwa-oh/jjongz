@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generated files") { dir ->
-    LocalDateTime dateTime = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)
+    String dateTime = DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())
     StringBuilder dbml = new StringBuilder()
     List<Map<String, String>> relationColumns = new ArrayList<>()
     List<String> tableNames = new ArrayList<>()
@@ -68,7 +68,10 @@ private void appendAttributeAndComment(DasColumn column, StringBuilder dbml) {
         }
         dbml.append(" Note: '${column.comment}'")
     }
-    dbml.append("]\n")
+    if (attributes.size() > 0 || column.comment != null) {
+        dbml.append("]")
+    }
+    dbml.append("\n")
 }
 
 private void appendColumnNameAndType(DasColumn column, StringBuilder dbml) {

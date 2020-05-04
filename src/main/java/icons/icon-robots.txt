@@ -1,0 +1,3 @@
+deprecated: addRow.png -> com.intellij.icons.AllIcons@/general/add.svg; to be removed in IDEA 2020 - use AllIcons.General.Add
+deprecated: user.png -> com.intellij.icons.AllIcons@/general/user.svg; to be removed in IDEA 2020 - use AllIcons.General.User
+deprecated: catalog.png -> com.intellij.icons.AllIcons@/modules/sourceRoot.svg; to be removed in IDEA 2020 - use AllIcons.Modules.SourceRoot
